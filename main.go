@@ -20,7 +20,21 @@ type Movie struct{
 
 type Director struct{
 	Firstname string `json:"firstname"`
-	lastname string `json:"lastname"`
+	Lastname string `json:"lastname"`
 }
 
-var movie
+var movies []Movie
+
+var main() {
+	r := mux.NewRouter()
+
+	movies = append(movies, Movie{ID: "1",Isbn:"42434", Title: "Movie One", Director: &Director{Firstname: "John", Lastname: "Doe"}})
+
+	r.HandleFunc("/movies", getMovies).Methods("GET")
+	r.HandleFunc("/movies/{id}", getmMovie).Method("GET")
+	r.HandleFunc("/movies", createMovie).Method("POST")
+	r.HandleFunc("/movies/{id}", updateMovie).Methods("POST")
+	r.HandleFunc("/movies/{id}", deleteMovie).Methods("DELETE")
+	fmt.Printf("Starting Server at port 8000\n")
+	log.Fatal(http.ListenAndServe(":8000", r))
+}
