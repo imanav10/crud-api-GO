@@ -22,3 +22,5 @@ type Director struct{
 	Firstname string `json:"firstname"`
 	lastname string `json:"lastname"`
 }
+
+var movie
